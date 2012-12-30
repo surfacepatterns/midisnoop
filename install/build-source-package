@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+
+from optparse import OptionParser
+from os import makedirs, pardir
+from os.path import abspath, basename, isdir, join
+
+from util import VERSION, createSourcePackage, getRootDirectory
+
+def main():
+    rootDirectory = getRootDirectory()
+
+    parser = OptionParser("usage: %prog [options]")
+    parser.add_option("-a", "--archive-name", action="store",
+                      default="midisnoop-%s.tar.gz" % VERSION,
+                      dest="archiveName", help="The archive file name")
+    parser.add_option("-d", "--destination-dir", action="store",
+                      default=abspath(join(rootDirectory, pardir)),
+                      dest="destinationDir",
+                      help="Directory to store the source archive in")
+    options, args = parser.parse_args()
+
+    if len(args):
+        parser.error("incorrect number of required arguments")
+    archiveName = options.archiveName
+    if basename(archiveName) != archiveName:
+        parser.error("'%s': invalid archive name" % archiveName)
+    destinationDir = options.destinationDir
+    if not isdir(destinationDir):
+        makedirs(destinationDir)
+    createSourcePackage(join(destinationDir, archiveName))
+
+if __name__ == "__main__":
+    main()

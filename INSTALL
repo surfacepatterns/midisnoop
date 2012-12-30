@@ -1,0 +1,36 @@
+Building and Installing `midisnoop`
+====================================
+
+Contents:
+
+1. Build Requirements
+2. Building and Installing from Source
+
+1. Build Requirements
+---------------------
+
+In order to compile `midisnoop`, you must have the following libraries (and
+their corresponding development packages) installed:
+
+  * qt4
+  * RtMidi
+
+In addition, you'll need the following tools:
+
+  * python
+  * qmake
+
+2. Building and Installing from Source
+--------------------------------------
+
+To build `midisnoop`, change your current directory to the top-level directory
+of the project and execute the following commands:
+
+  ./configure --prefix=/usr
+  make
+
+Optionally, you can use your own directory prefix.
+
+To install `midisnoop`, execute the command:
+
+  make install

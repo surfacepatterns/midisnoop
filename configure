@@ -1,0 +1,106 @@
+#!/usr/bin/env python
+
+from optparse import OptionParser
+from os.path import abspath, dirname, join
+from subprocess import call
+from sys import argv, stdout
+
+from install.util import (
+    MAJOR_VERSION,
+    MINOR_VERSION,
+    PLATFORM_MACX,
+    PLATFORM_UNIX,
+    PLATFORM_WIN32,
+    REVISION,
+    getPlatform
+)
+
+def main():
+    parser = OptionParser("usage: %prog [options] [qmake-args]")
+    parser.add_option("--bin-dir", action="store", default=None, dest="binDir",
+                      help="Install directory for midisnoop executable")
+    parser.add_option("--build-dir", action="store", default=None,
+                      dest="buildDir", help="Build directory")
+    parser.add_option("--data-dir", action="store", default=None,
+                      dest="dataDir",
+                      help="Install directory for general data files")
+    parser.add_option("--data-root-dir", action="store", default=None,
+                      dest="dataRootDir", help="Install root for data files")
+    parser.add_option("--debug", action="store_true", default=False,
+                      dest="debug", help="Build a debug executable")
+    parser.add_option("--exec-prefix", action="store", default=None,
+                      dest="execPrefix",
+                      help="Install prefix for executable data")
+    parser.add_option("--make-dir", action="store", default=None,
+                      dest="makeDir", help="Make directory")
+    parser.add_option("--prefix", action="store", default=None, dest="prefix",
+                      help="Install prefix")
+    options, args = parser.parse_args()
+
+    platform = getPlatform()
+    platformArgs = []
+    if platform == PLATFORM_MACX:
+        platformArgs += ["-spec", "macx-g++"]
+        platformStr = "MACX"
+    elif platform == PLATFORM_WIN32:
+        platformStr = "WIN32"
+    else:
+        platformStr = "UNIX"
+
+    scriptDir = abspath(dirname(argv[0]))
+
+    buildDir = options.buildDir
+    if buildDir is None:
+        buildDir = "build"
+    buildDir = abspath(join(scriptDir, buildDir))
+
+    makeDir = options.makeDir
+    if makeDir is None:
+        makeDir = "make"
+    makeDir = abspath(join(scriptDir, makeDir))
+
+    prefix = options.prefix
+    if prefix is None:
+        prefix = "/usr/local"
+    else:
+        prefix = abspath(prefix)
+
+    dataRootDir = options.dataRootDir
+    if dataRootDir is None:
+        dataRootDir = "share"
+    dataRootDir = abspath(join(prefix, dataRootDir))
+
+    execPrefix = options.execPrefix
+    if execPrefix is None:
+        execPrefix = prefix
+    else:
+        execPrefix = abspath(execPrefix)
+
+    binDir = options.binDir
+    if binDir is None:
+        binDir = "bin"
+    binDir = abspath(join(execPrefix, binDir))
+
+    dataDir = options.dataDir
+    if dataDir is None:
+        dataDir = dataRootDir
+    else:
+        dataDir = abspath(join(prefix, dataDir))
+
+    # Run `qmake`
+    qmakeArgs = ["qmake", "-recursive"] + platformArgs + args + \
+        ["MAJOR_VERSION=%d" % MAJOR_VERSION, "MINOR_VERSION=%d" % MINOR_VERSION,
+         "REVISION=%d" % REVISION, "BUILDDIR=%s" % buildDir,
+         "MAKEDIR=%s" % makeDir, "PREFIX=%s" % prefix,
+         "DATAROOTDIR=%s" % dataRootDir, "EXECPREFIX=%s" % execPrefix,
+         "BINDIR=%s" % binDir, "DATADIR=%s" % dataDir]
+    if options.debug:
+        qmakeArgs.append("DEBUG=1")
+    if call(qmakeArgs):
+        parser.error("qmake returned an error")
+
+    stdout.write("Configure successful.  Run `make` to build, and "
+                 "`make install` to install.\n")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Send Message</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/midisnoop/images/16x16/add.png</normaloff>:/midisnoop/images/16x16/add.png</iconset>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" stretch="1,0">
+   <item>
+    <widget class="QPlainTextEdit" name="message">
+     <property name="text" stdset="0">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" stretch="1,0,0">
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="sendButton">
+       <property name="text">
+        <string>Send</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/midisnoop/images/16x16/add.png</normaloff>:/midisnoop/images/16x16/add.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="closeButton">
+       <property name="text">
+        <string>Close</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/midisnoop/images/16x16/close.png</normaloff>:/midisnoop/images/16x16/close.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

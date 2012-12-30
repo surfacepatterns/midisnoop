@@ -1,0 +1,9 @@
+Makefile
+build/
+build-stamp
+debian/
+make/
+resources/
+*.pro.user
+*.pyc
+!templates/debian/

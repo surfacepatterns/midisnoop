@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>325</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Configure</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/midisnoop/images/16x16/configure.png</normaloff>:/midisnoop/images/16x16/configure.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" stretch="1,0,0">
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>MIDI Driver</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <item>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Driver</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="driver">
+          <item>
+           <property name="text">
+            <string>--none selected--</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Input Port</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="inputPort">
+          <item>
+           <property name="text">
+            <string>--none selected--</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Output Port</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="outputPort">
+          <item>
+           <property name="text">
+            <string>--none selected--</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Event Filter</string>
+     </property>
+     <layout class="QVBoxLayout">
+      <item>
+       <widget class="QCheckBox" name="ignoreSystemExclusiveEvents">
+        <property name="text">
+         <string>Ignore System Exclusive Events</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ignoreTimeEvents">
+        <property name="text">
+         <string>Ignore Time Events</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ignoreActiveSensingEvents">
+        <property name="text">
+         <string>Ignore Active Sensing Events</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout">
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="closeButton">
+       <property name="text">
+        <string>Close</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/midisnoop/images/16x16/close.png</normaloff>:/midisnoop/images/16x16/close.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="/midisnoop">
+    <file>images/16x16/add.png</file>
+    <file>images/16x16/clear.png</file>
+    <file>images/16x16/close.png</file>
+    <file>images/16x16/configure.png</file>
+    <file>images/16x16/error.png</file>
+    <file>images/16x16/information.png</file>
+    <file>images/16x16/quit.png</file>
+    <file>images/32x32/error.png</file>
+    <file>images/32x32/information.png</file>
+    <file>aboutview.ui</file>
+    <file>configureview.ui</file>
+    <file>errorview.ui</file>
+    <file>mainview.ui</file>
+    <file>messageview.ui</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Audio;AudioVideo;Qt;
+Comment=MIDI monitor and prober.
+Encoding=UTF-8
+Exec=${binDir}/midisnoop
+GenericName=Midisnoop
+GenericName[en_US]=Midisnoop
+Hidden=false
+#Icon=${dataDir}/icons/midisnoop.png
+Name=Midisnoop
+Terminal=false
+Type=Application
