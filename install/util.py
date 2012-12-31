@@ -1,6 +1,16 @@
 from gzip import open
-from os import chdir, getcwd, makedirs, pardir, sep
-from os.path import abspath, dirname, isdir, join
+from os import (
+    X_OK,
+    access,
+    chdir,
+    environ,
+    getcwd,
+    makedirs,
+    pardir,
+    pathsep,
+    sep
+)
+from os.path import abspath, dirname, isabs, isdir, isfile, join
 from platform import mac_ver, win32_ver
 from string import Template
 from subprocess import PIPE, Popen
@@ -41,6 +51,19 @@ def createSourcePackage(path):
             chdir(oldDirectory)
     finally:
         gzipStream.close()
+
+def findExecutable(command):
+    if not isabs(command):
+        path = environ.get("PATH")
+        if path is not None:
+            for path in path.split(pathsep):
+                commandPath = abspath(join(path.strip('\"'), command))
+                if isfile(commandPath) and access(commandPath, X_OK):
+                    return commandPath
+    commandPath = abspath(command)
+    if isfile(commandPath) and access(commandPath, X_OK):
+        return commandPath
+    return None
 
 def getPlatform():
     return _PLATFORM

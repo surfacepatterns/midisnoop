@@ -3,7 +3,7 @@
 from optparse import OptionParser
 from os.path import abspath, dirname, join
 from subprocess import call
-from sys import argv, stdout
+from sys import argv, stderr, stdout
 
 from install.util import (
     MAJOR_VERSION,
@@ -12,6 +12,7 @@ from install.util import (
     PLATFORM_UNIX,
     PLATFORM_WIN32,
     REVISION,
+    findExecutable,
     getPlatform
 )
 
@@ -36,6 +37,17 @@ def main():
     parser.add_option("--prefix", action="store", default=None, dest="prefix",
                       help="Install prefix")
     options, args = parser.parse_args()
+
+    pkgConfigPath = findExecutable("pkg-config")
+    if pkgConfigPath is None:
+        stderr.write("Warning: pkg-config not found\n")
+    elif call([pkgConfigPath, "--exists", "rtmidi"]) or \
+         call([pkgConfigPath, "--atleast-version=2.0.1", "rtmidi"]):
+        exit("Error: rtmidi version >= 2.0.1 is required for compilation")
+
+    qmakePath = findExecutable("qmake")
+    if qmakePath is None:
+        exit("Error: qmake is required for build configuration")
 
     platform = getPlatform()
     platformArgs = []
@@ -88,7 +100,7 @@ def main():
         dataDir = abspath(join(prefix, dataDir))
 
     # Run `qmake`
-    qmakeArgs = ["qmake", "-recursive"] + platformArgs + args + \
+    qmakeArgs = [qmakePath, "-recursive"] + platformArgs + args + \
         ["MAJOR_VERSION=%d" % MAJOR_VERSION, "MINOR_VERSION=%d" % MINOR_VERSION,
          "REVISION=%d" % REVISION, "BUILDDIR=%s" % buildDir,
          "MAKEDIR=%s" % makeDir, "PREFIX=%s" % prefix,
