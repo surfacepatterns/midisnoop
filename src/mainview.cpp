@@ -59,6 +59,7 @@ MainView::MainView(QObject *parent):
                              tr("Timestamp"), Qt::DisplayRole);
 
     tableView = getChild<QTableView>(widget, "centralWidget");
+    tableView->setItemDelegate(&tableDelegate);
     tableView->setModel(&tableModel);
 }
 
@@ -74,9 +75,16 @@ MainView::addMessage(quint64 timeStamp, const QString &statusDescription,
     int count = tableModel.rowCount();
     bool inserted = tableModel.insertRow(count);
     assert(inserted);
+    Qt::AlignmentFlag alignment = Qt::AlignTop;
     setModelData(count, MESSAGETABLECOLUMN_DATA, dataDescription);
+    setModelData(count, MESSAGETABLECOLUMN_DATA, alignment,
+                 Qt::TextAlignmentRole);
     setModelData(count, MESSAGETABLECOLUMN_STATUS, statusDescription);
+    setModelData(count, MESSAGETABLECOLUMN_STATUS, alignment,
+                 Qt::TextAlignmentRole);
     setModelData(count, MESSAGETABLECOLUMN_TIMESTAMP, timeStamp);
+    setModelData(count, MESSAGETABLECOLUMN_TIMESTAMP, alignment,
+                 Qt::TextAlignmentRole);
     if (! valid) {
         setModelData(count, MESSAGETABLECOLUMN_STATUS,
                      QIcon(":/midisnoop/images/16x16/error.png"),

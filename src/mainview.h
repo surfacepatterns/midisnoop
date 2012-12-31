@@ -26,6 +26,7 @@
 #include <QtGui/QTableView>
 
 #include "designerview.h"
+#include "messagetabledelegate.h"
 
 class MainView: public DesignerView {
 
@@ -90,6 +91,7 @@ private:
     QAction *addAction;
     QAction *clearAction;
     QAction *configureAction;
+    MessageTableDelegate tableDelegate;
     QAction *quitAction;
     QStandardItemModel tableModel;
     QTableView *tableView;

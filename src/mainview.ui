@@ -14,11 +14,17 @@
    <string>midisnoop</string>
   </property>
   <widget class="QTableView" name="centralWidget">
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAsNeeded</enum>
+   </property>
    <property name="editTriggers">
-    <set>QAbstractItemView::NoEditTriggers</set>
+    <set>QAbstractItemView::CurrentChanged|QAbstractItemView::SelectedClicked</set>
    </property>
    <property name="alternatingRowColors">
     <bool>false</bool>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
    </property>
    <property name="verticalScrollMode">
     <enum>QAbstractItemView::ScrollPerPixel</enum>
