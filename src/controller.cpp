@@ -166,7 +166,8 @@ Controller::getGenericDataDescription(const QByteArray &message, int lastIndex)
 
     QStringList dataParts;
     for (int i = 1; i <= lastIndex; i++) {
-        dataParts += QString("%1").arg(static_cast<uint>(message[i]), 2, 16);
+        dataParts += QString("%1").
+            arg(static_cast<uint>(message[i]), 2, 16, QChar('0'));
     }
     return dataParts.join(" ");
 }
@@ -235,7 +236,7 @@ Controller::parseMessage(const QByteArray &message)
     if (status < 0x80) {
         dataDescription = getGenericDataDescription(message);
         statusDescription = tr("%1 (invalid status)").
-            arg(static_cast<uint>(status), 2, 16);
+            arg(static_cast<uint>(status), 2, 16, QChar('0'));
         valid = false;
         return;
     }
@@ -249,7 +250,7 @@ Controller::parseMessage(const QByteArray &message)
     case -1:
         dataDescription = getGenericDataDescription(message);
         statusDescription = tr("%1 (undefined status)").
-            arg(static_cast<uint>(status), 2, 16);
+            arg(static_cast<uint>(status), 2, 16, QChar('0'));
         valid = false;
         return;
 
@@ -273,7 +274,7 @@ Controller::parseMessage(const QByteArray &message)
         if (length != expectedLength) {
             dataDescription = getGenericDataDescription(message);
             statusDescription = tr("%1 (incorrect length)").
-                arg(static_cast<uint>(status), 2, 16);
+                arg(static_cast<uint>(status), 2, 16, QChar('0'));
             valid = false;
             return;
         }
@@ -285,7 +286,7 @@ Controller::parseMessage(const QByteArray &message)
         if (static_cast<quint8>(message[i]) >= 0x80) {
             dataDescription = getGenericDataDescription(message);
             statusDescription = tr("%1 (invalid data)").
-                arg(static_cast<uint>(status), 2, 16);
+                arg(static_cast<uint>(status), 2, 16, QChar('0'));
             valid = false;
             return;
         }
