@@ -82,6 +82,7 @@ MainView::addMessage(quint64 timeStamp, const QString &statusDescription,
                      QIcon(":/midisnoop/images/16x16/error.png"),
                      Qt::DecorationRole);
     }
+    tableView->resizeRowToContents(count);
     return count;
 }
 
