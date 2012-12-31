@@ -59,11 +59,16 @@ Controller::Controller(Application &application, QObject *parent):
     for (int i = 0; i < driverCount; i++) {
         configureView.addDriver(i, engine.getDriverName(i));
     }
+    int driver = engine.getDriver();
+    int outputPort = engine.getOutputPort();
+    configureView.setDriver(driver);
+    configureView.setInputPort(engine.getInputPort());
     configureView.setIgnoreActiveSensingEvents
         (engine.getIgnoreActiveSensingEvents());
     configureView.setIgnoreSystemExclusiveEvents
         (engine.getIgnoreSystemExclusiveEvents());
     configureView.setIgnoreTimeEvents(engine.getIgnoreTimeEvents());
+    configureView.setOutputPort(outputPort);
     connect(&configureView, SIGNAL(closeRequest()),
             &configureView, SLOT(hide()));
     connect(&configureView, SIGNAL(driverChangeRequest(int)),
@@ -86,6 +91,7 @@ Controller::Controller(Application &application, QObject *parent):
             &errorView, SLOT(hide()));
 
     // Setup main view
+    mainView.setMessageSendEnabled((driver != -1) && (outputPort != -1));
     connect(&mainView, SIGNAL(aboutRequest()),
             &aboutView, SLOT(show()));
     connect(&mainView, SIGNAL(addMessageRequest()),
