@@ -175,6 +175,7 @@ Controller::getGenericDataDescription(const QByteArray &message, int lastIndex)
         dataParts += QString("%1").
             arg(static_cast<uint>(message[i]), 2, 16, QChar('0'));
     }
+    dataParts += tr("(%1 bytes)").arg(lastIndex);
     return dataParts.join(" ");
 }
 
