@@ -213,9 +213,6 @@ Engine::setDriver(int index)
 
         // Close the currently open MIDI driver.
         if (driver != -1) {
-
-            qDebug() << "Closing current driver ...";
-
             removePorts();
             delete input;
             delete output;
@@ -225,18 +222,12 @@ Engine::setDriver(int index)
 
         // Open the new driver.
         if (index != -1) {
-
-            qDebug() << "Opening new driver ...";
-
             RtMidi::Api api = driverAPIs[index];
             try {
                 input = new RtMidiIn(api, "midisnoop");
                 QScopedPointer<RtMidiIn> inputPtr(input);
                 output = new RtMidiOut(api, "midisnoop");
                 QScopedPointer<RtMidiOut> outputPtr(output);
-
-                qDebug() << "Setting input callback ...";
-
                 input->setCallback(handleMidiInput, this);
 
                 // Add ports.
@@ -281,9 +272,6 @@ Engine::setDriver(int index)
                 throw Error(e.what());
             }
             driver = index;
-
-            qDebug() << "Driver change complete.";
-
             emit driverChanged(index);
         }
     }
@@ -339,9 +327,6 @@ Engine::setInputPort(int index)
         // Open the new input port.
         if (index != -1) {
             try {
-
-                qDebug() << "Opening input port " << index;
-
                 if (virtualPortsAdded &&
                     (index == (inputPortNames.count() - 1))) {
                     input->openVirtualPort("MIDI Input");
