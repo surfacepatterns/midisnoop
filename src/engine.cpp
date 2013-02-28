@@ -19,11 +19,18 @@
 
 #include <cassert>
 
-#include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 
 #include "engine.h"
 #include "error.h"
+
+#if QT_VERSION >= 0x040700
+#include <QtCore/QDateTime>
+#else
+#include <cerrno>
+#include <cstring>
+#include <sys/time.h>
+#endif
 
 // Static functions
 
@@ -161,11 +168,28 @@ Engine::getOutputPortName(int index) const
     return outputPortNames[index];
 }
 
+quint64
+Engine::getCurrentTimestamp() const
+{
+
+#if QT_VERSION >= 0x040700
+    return QDateTime::currentDateTime().toMSecsSinceEpoch();
+#else
+    struct timeval time;
+    if (gettimeofday(&time, 0) == -1) {
+        throw Error(tr("failed to get time of day: %1").arg(strerror(errno)));
+    }
+    return (static_cast<quint64>(time.tv_sec) * 1000) +
+        (static_cast<quint64>(time.tv_usec) / 1000);
+#endif
+
+}
+
 void
 Engine::handleMidiInput(double /*timeStamp*/,
                         std::vector<unsigned char> *message)
 {
-    quint64 timeStamp = QDateTime::currentDateTime().toMSecsSinceEpoch();
+    quint64 timeStamp = getCurrentTimestamp();
     QByteArray msg;
     int size = static_cast<int>(message->size());
     for (int i = 0; i < size; i++) {
@@ -202,7 +226,7 @@ Engine::sendMessage(const QByteArray &message)
     } catch (RtError &e) {
         throw Error(e.what());
     }
-    return QDateTime::currentDateTime().toMSecsSinceEpoch();
+    return getCurrentTimestamp();
 }
 
 void

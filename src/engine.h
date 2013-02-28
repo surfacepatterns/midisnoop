@@ -137,6 +137,9 @@ private:
     handleMidiInput(double timeStamp, std::vector<unsigned char> *message,
                     void *engine);
 
+    quint64
+    getCurrentTimestamp() const;
+
     void
     handleMidiInput(double timeStamp, std::vector<unsigned char> *message);
 
