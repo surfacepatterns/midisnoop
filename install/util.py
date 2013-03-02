@@ -1,4 +1,4 @@
-from gzip import open
+from gzip import open as _open
 from os import (
     X_OK,
     access,
@@ -17,7 +17,7 @@ from subprocess import PIPE, Popen
 
 MAJOR_VERSION = 0
 MINOR_VERSION = 1
-REVISION = 2
+REVISION = 3
 VERSION = "%d.%d.%d" % (MAJOR_VERSION, MINOR_VERSION, REVISION)
 
 PLATFORM_MACX = 1
@@ -28,7 +28,7 @@ _PLATFORM = (mac_ver()[0] and PLATFORM_MACX) or \
     (win32_ver()[0] and PLATFORM_WIN32) or PLATFORM_UNIX
 
 def createSourcePackage(path):
-    gzipStream = open(filename=path, mode="wb")
+    gzipStream = _open(filename=path, mode="wb")
     try:
         gitArgs = ["git", "archive", "--format=tar",
                    "--prefix=midisnoop-%s%s" % (VERSION, sep), "HEAD"]
@@ -86,13 +86,13 @@ def writeTemplate(destination, source, data):
     sourceDir = dirname(source)
     if not isdir(sourceDir):
         makedirs(sourceDir)
-    fp = file(source)
+    fp = open(source)
     try:
         s = fp.read()
     finally:
         fp.close()
     s = Template(s).substitute(data)
-    fp = file(destination, 'w')
+    fp = open(destination, 'w')
     try:
         fp.write(s)
     finally:
