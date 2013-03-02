@@ -1,0 +1,47 @@
+Packaging `midisnoop`
+=====================
+
+Contents:
+
+1. Install Parts
+2. Install Options For Packagers
+
+1. Install Parts
+----------------
+
+A `midisnoop` install is made up of two files:
+
+  1. `midisnoop` - The application.
+  2. `midisnoop.desktop` - The desktop file.
+
+2. Install Options For Packagers
+--------------------------------
+
+`midisnoop` is built using the typical UNIX build process (`configure`, `make`,
+`make install`).  There are several options that you can pass to the configure
+script in order to select what will or will not be built, and where each item
+will be installed:
+
+  $ ./configure --help
+  Usage: configure [options] [qmake-args]
+
+  Options:
+    -h, --help            show this help message and exit
+    --bin-dir=BINDIR      Install directory for midisnoop executable
+    --build-dir=BUILDDIR  Build directory
+    --data-dir=DATADIR    Install directory for general data files
+    --data-root-dir=DATAROOTDIR
+                          Install root for data files
+    --debug               Build a debug executable
+    --exec-prefix=EXECPREFIX
+                          Install prefix for executable data
+    --make-dir=MAKEDIR    Make directory
+    --prefix=PREFIX       Install prefix
+
+After building `midisnoop`, you may want to set the install path for to a
+different location than the 'prefix' for packaging purposes.  To do this,
+execute:
+
+  make install INSTALL_ROOT=/path/to/some/location
+
+You *must* make sure that the path is not a relative path.
