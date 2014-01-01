@@ -20,8 +20,8 @@
 #ifndef __MESSAGEVIEW_H__
 #define __MESSAGEVIEW_H__
 
-#include <QtGui/QPlainTextEdit>
-#include <QtGui/QPushButton>
+#include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QPushButton>
 
 #include "designerview.h"
 

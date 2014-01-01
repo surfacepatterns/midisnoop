@@ -20,10 +20,10 @@
 #ifndef __MAINVIEW_H__
 #define __MAINVIEW_H__
 
-#include <QtGui/QAction>
-#include <QtGui/QMainWindow>
 #include <QtGui/QStandardItemModel>
-#include <QtGui/QTableView>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QTableView>
 
 #include "designerview.h"
 #include "messagetabledelegate.h"

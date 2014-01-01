@@ -22,13 +22,13 @@
 
 #include <cassert>
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 template<typename T>
 inline T *
 getChild(const QObject *object, const QString &name=QString())
 {
-    T *child = qFindChild<T *>(object, name);
+    T *child = object->findChild<T *>(name);
     assert(child);
     return child;
 }

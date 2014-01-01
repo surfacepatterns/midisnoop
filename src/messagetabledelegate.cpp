@@ -17,9 +17,9 @@
  * Ave, Cambridge, MA 02139, USA.
  */
 
-#include <QtGui/QApplication>
-#include <QtGui/QTextEdit>
 #include <QtGui/QTextFrame>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QTextEdit>
 
 #include "messagetabledelegate.h"
 

@@ -63,7 +63,7 @@ isEmpty(DATADIR) {
     MIDISNOOP_DATA_INSTALL_PATH = $${DATADIR}
 }
 
-CONFIG += console uitools warn_on
+CONFIG += console warn_on
 DEFINES += MIDISNOOP_MAJOR_VERSION=$${MAJOR_VERSION} \
     MIDISNOOP_MINOR_VERSION=$${MINOR_VERSION} \
     MIDISNOOP_REVISION=$${REVISION}
@@ -86,6 +86,7 @@ HEADERS += aboutview.h \
 LIBS += -lrtmidi
 MOC_DIR = $${MAKEDIR}
 OBJECTS_DIR = $${MAKEDIR}
+QT += core gui uitools widgets
 RCC_DIR = $${MAKEDIR}
 RESOURCES += resources.qrc
 SOURCES += aboutview.cpp \

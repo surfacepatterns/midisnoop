@@ -19,7 +19,7 @@
 
 #include <cassert>
 
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 
 #include "mainview.h"
 #include "util.h"

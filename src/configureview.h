@@ -20,9 +20,9 @@
 #ifndef __CONFIGUREVIEW_H__
 #define __CONFIGUREVIEW_H__
 
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QPushButton>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QPushButton>
 
 #include "designerview.h"
 

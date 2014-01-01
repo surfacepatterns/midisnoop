@@ -20,7 +20,7 @@
 #ifndef __MESSAGETABLEDELEGATE_H__
 #define __MESSAGETABLEDELEGATE_H__
 
-#include <QtGui/QStyledItemDelegate>
+#include <QtWidgets/QStyledItemDelegate>
 
 class MessageTableDelegate: public QStyledItemDelegate {
 

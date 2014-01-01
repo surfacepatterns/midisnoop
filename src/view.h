@@ -20,7 +20,7 @@
 #ifndef __VIEW_H__
 #define __VIEW_H__
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 #include "closeeventfilter.h"
 
