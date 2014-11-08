@@ -91,6 +91,7 @@ MainView::addMessage(quint64 timeStamp, const QString &statusDescription,
                      Qt::DecorationRole);
     }
     tableView->resizeRowToContents(count);
+    tableView->scrollToBottom();
     return count;
 }
 
