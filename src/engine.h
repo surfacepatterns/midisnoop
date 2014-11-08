@@ -141,7 +141,8 @@ private:
     getCurrentTimestamp() const;
 
     void
-    handleMidiInput(double timeStamp, std::vector<unsigned char> *message);
+    handleMidiInput(double timeStamp,
+                    const std::vector<unsigned char> &message);
 
     void
     removePorts();

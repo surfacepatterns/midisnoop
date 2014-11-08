@@ -38,7 +38,7 @@ void
 Engine::handleMidiInput(double timeStamp, std::vector<unsigned char> *message,
                         void *engine)
 {
-    static_cast<Engine *>(engine)->handleMidiInput(timeStamp, message);
+    static_cast<Engine *>(engine)->handleMidiInput(timeStamp, *message);
 }
 
 // Class definition
@@ -187,13 +187,34 @@ Engine::getCurrentTimestamp() const
 
 void
 Engine::handleMidiInput(double /*timeStamp*/,
-                        std::vector<unsigned char> *message)
+                        const std::vector<unsigned char> &message)
 {
+    switch (message[0]) {
+    case 0xf0:
+        if (ignoreSystemExclusiveEvents) {
+            qWarning() << "RtMidi did not filter system exclusive event";
+            return;
+        }
+        break;
+    case 0xf1:
+    case 0xf8:
+    case 0xf9:
+        if (ignoreTimeEvents) {
+            qWarning() << "RtMidi did not filter time event";
+            return;
+        }
+        break;
+    case 0xfe:
+        if (ignoreActiveSensingEvents) {
+            qWarning() << "RtMidi did not filter active sensing event";
+            return;
+        }
+    }
     quint64 timeStamp = getCurrentTimestamp();
     QByteArray msg;
-    int size = static_cast<int>(message->size());
+    int size = static_cast<int>(message.size());
     for (int i = 0; i < size; i++) {
-        msg.append(message->at(i));
+        msg.append(message[i]);
     }
     emit messageReceived(timeStamp, msg);
 }
