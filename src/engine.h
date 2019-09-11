@@ -21,6 +21,7 @@
 #define __ENGINE_H__
 
 #include <QtCore/QByteArray>
+#include <QtCore/QObject>
 #include <QtCore/QStringList>
 #include <QtCore/QVector>
 
