@@ -24,6 +24,9 @@
 #include "engine.h"
 #include "error.h"
 
+// RtError was renamed to RtMidiError in rtmidi 2.1
+typedef RtMidiError RtError;
+
 #if QT_VERSION >= 0x040700
 #include <QtCore/QDateTime>
 #else
@@ -62,9 +65,6 @@ Engine::Engine(QObject *parent):
             break;
         case RtMidi::UNIX_JACK:
             driverNames.append(tr("JACK Audio Connection Kit"));
-            break;
-        case RtMidi::WINDOWS_KS:
-            driverNames.append(tr("Windows Kernel Streaming"));
             break;
         case RtMidi::WINDOWS_MM:
             driverNames.append(tr("Windows Multimedia MIDI"));
