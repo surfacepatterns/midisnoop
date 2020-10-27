@@ -63,7 +63,7 @@ isEmpty(DATADIR) {
     MIDISNOOP_DATA_INSTALL_PATH = $${DATADIR}
 }
 
-CONFIG += console warn_on
+CONFIG += console link_pkgconfig warn_on
 DEFINES += MIDISNOOP_MAJOR_VERSION=$${MAJOR_VERSION} \
     MIDISNOOP_MINOR_VERSION=$${MINOR_VERSION} \
     MIDISNOOP_REVISION=$${REVISION}
@@ -83,7 +83,7 @@ HEADERS += aboutview.h \
     messageview.h \
     util.h \
     view.h
-LIBS += -lrtmidi
+PKGCONFIG += rtmidi
 MOC_DIR = $${MAKEDIR}
 OBJECTS_DIR = $${MAKEDIR}
 QT += core gui uitools widgets
