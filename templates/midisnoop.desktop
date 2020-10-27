@@ -1,12 +1,12 @@
 [Desktop Entry]
 Categories=Audio;AudioVideo;Qt;
 Comment=MIDI monitor and prober.
-Encoding=UTF-8
+Keywords=midi;monitor;jackd;alsa;
 Exec=${binDir}/midisnoop
 GenericName=Midisnoop
 GenericName[en_US]=Midisnoop
 Hidden=false
-#Icon=${dataDir}/icons/midisnoop.png
+Icon=midisnoop
 Name=Midisnoop
 Terminal=false
 Type=Application
